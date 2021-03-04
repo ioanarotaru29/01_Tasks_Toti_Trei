@@ -101,7 +101,10 @@ public class Controller {
             editNewStage.initModality(Modality.APPLICATION_MODAL);//??????
             editNewStage.show();
         }
-        catch (IOException e){
+        catch (IOException|NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error loading/No task selected");
+            alert.showAndWait();
             log.error("Error loading new-edit-task.fxml");
         }
     }
@@ -125,19 +128,28 @@ public class Controller {
             stage.show();
         }
         catch (IOException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error loading/ No task selected");
+            alert.showAndWait();
             log.error("error loading task-info.fxml");
         }
     }
     @FXML
     public void showFilteredTasks(){
-        Date start = getDateFromFilterField(datePickerFrom.getValue(), fieldTimeFrom.getText());
-        Date end = getDateFromFilterField(datePickerTo.getValue(), fieldTimeTo.getText());
+        try{
+            Date start = getDateFromFilterField(datePickerFrom.getValue(), fieldTimeFrom.getText());
+            Date end = getDateFromFilterField(datePickerTo.getValue(), fieldTimeTo.getText());
 
-        Iterable<Task> filtered =  service.filterTasks(start, end);
+            Iterable<Task> filtered =  service.filterTasks(start, end);
 
-        ObservableList<Task> observableTasks = FXCollections.observableList((ArrayList)filtered);
-        tasks.setItems(observableTasks);
-        updateCountLabel(observableTasks);
+            ObservableList<Task> observableTasks = FXCollections.observableList((ArrayList)filtered);
+            tasks.setItems(observableTasks);
+            updateCountLabel(observableTasks);
+        } catch (IllegalArgumentException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(e.getMessage());
+            alert.showAndWait();
+        }
     }
     private Date getDateFromFilterField(LocalDate localDate, String time){
         Date date = dateService.getDateValueFromLocalDate(localDate);

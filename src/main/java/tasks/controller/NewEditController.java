@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
@@ -173,17 +170,10 @@ public class NewEditController {
         }
         catch (RuntimeException e){
             incorrectInputMade = true;
-            try {
-                Stage stage = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/field-validator.fxml"));
-                stage.setScene(new Scene(root, 350, 150));
-                stage.setResizable(false);
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.show();
-            }
-            catch (IOException ioe){
-                log.error("error loading field-validator.fxml");
-            }
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid input");
+            alert.setHeaderText("Invalid input: " + e.getMessage());
+            alert.showAndWait();
         }
         return result;
     }
