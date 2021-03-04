@@ -21,90 +21,73 @@ public class TaskIO {
     private static final int secondsInMin = 60;
 
     private static final Logger log = Logger.getLogger(TaskIO.class.getName());
-    public static void write(TaskList tasks, OutputStream out) throws IOException {
-        DataOutputStream dataOutputStream = new DataOutputStream(out);
-        try {
+    public static void write(TaskList tasks, OutputStream out) {
+        try (DataOutputStream dataOutputStream = new DataOutputStream(out)) {
             dataOutputStream.writeInt(tasks.size());
-            for (Task t : tasks){
+            for (Task t : tasks) {
                 dataOutputStream.writeInt(t.getTitle().length());
                 dataOutputStream.writeUTF(t.getTitle());
                 dataOutputStream.writeBoolean(t.isActive());
                 dataOutputStream.writeInt(t.getRepeatInterval());
-                if (t.isRepeated()){
+                if (t.isRepeated()) {
                     dataOutputStream.writeLong(t.getStartTime().getTime());
                     dataOutputStream.writeLong(t.getEndTime().getTime());
-                }
-                else {
+                } else {
                     dataOutputStream.writeLong(t.getTime().getTime());
                 }
             }
-        }
-        finally {
-            dataOutputStream.close();
+        } catch (IOException e) {
+            log.error("IO exception reading or writing file");
         }
     }
     public static void read(TaskList tasks, InputStream in)throws IOException {
-        DataInputStream dataInputStream = new DataInputStream(in);
-        try {
+        try (DataInputStream dataInputStream = new DataInputStream(in)) {
             int listLength = dataInputStream.readInt();
-            for (int i = 0; i < listLength; i++){
+            for (int i = 0; i < listLength; i++) {
                 int titleLength = dataInputStream.readInt();
                 String title = dataInputStream.readUTF();
                 boolean isActive = dataInputStream.readBoolean();
                 int interval = dataInputStream.readInt();
                 Date startTime = new Date(dataInputStream.readLong());
                 Task taskToAdd;
-                if (interval > 0){
+                if (interval > 0) {
                     Date endTime = new Date(dataInputStream.readLong());
                     taskToAdd = new Task(title, startTime, endTime, interval);
-                }
-                else {
+                } else {
                     taskToAdd = new Task(title, startTime);
                 }
                 taskToAdd.setActive(isActive);
                 tasks.add(taskToAdd);
             }
         }
-        finally {
-            dataInputStream.close();
-        }
     }
-    public static void writeBinary(TaskList tasks, File file)throws IOException{
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(file);
-            write(tasks,fos);
-        }
-        catch (IOException e){
+    public static void writeBinary(TaskList tasks, File file){
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            write(tasks, fos);
+        } catch (IOException e) {
             log.error("IO exception reading or writing file");
-        }
-        finally {
-            fos.close();
         }
     }
 
-    public static void readBinary(TaskList tasks, File file) throws IOException{
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
+    public static void readBinary(TaskList tasks, File file){
+        try (FileInputStream fis = new FileInputStream(file)) {
             read(tasks, fis);
+        } catch (IOException e) {
+            log.error("IO exception reading or writing file");
+        }
+    }
+    public static void write(TaskList tasks, Writer out) {
+        try(BufferedWriter bufferedWriter = new BufferedWriter(out)){
+            Task lastTask = tasks.getTask(tasks.size()-1);
+            for (Task t : tasks){
+                bufferedWriter.write(getFormattedTask(t));
+                bufferedWriter.write(t.equals(lastTask) ? ';' : '.');
+                bufferedWriter.newLine();
+            }
         }
         catch (IOException e){
             log.error("IO exception reading or writing file");
         }
-        finally {
-            fis.close();
-        }
-    }
-    public static void write(TaskList tasks, Writer out) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(out);
-        Task lastTask = tasks.getTask(tasks.size()-1);
-        for (Task t : tasks){
-            bufferedWriter.write(getFormattedTask(t));
-            bufferedWriter.write(t.equals(lastTask) ? ';' : '.');
-            bufferedWriter.newLine();
-        }
-        bufferedWriter.close();
 
     }
 
@@ -119,26 +102,20 @@ public class TaskIO {
         reader.close();
 
     }
-    public static void writeText(TaskList tasks, File file) throws IOException {
-        FileWriter fileWriter = new FileWriter(file);
-        try {
+    public static void writeText(TaskList tasks, File file) {
+        try (FileWriter fileWriter = new FileWriter(file)) {
             write(tasks, fileWriter);
-        }
-        catch (IOException e ){
+        } catch (IOException e) {
             log.error("IO exception reading or writing file");
-        }
-        finally {
-            fileWriter.close();
         }
 
     }
-    public static void readText(TaskList tasks, File file) throws IOException {
-        FileReader fileReader = new FileReader(file);
-        try {
+    public static void readText(TaskList tasks, File file) {
+        try (FileReader fileReader = new FileReader(file)) {
             read(tasks, fileReader);
         }
-        finally {
-            fileReader.close();
+        catch (IOException e) {
+            log.error("IO exception reading or writing file");
         }
     }
     //// service methods for reading
@@ -293,11 +270,6 @@ public class TaskIO {
         for (Task t : tasksList){
             taskList.add(t);
         }
-        try {
-            TaskIO.writeBinary(taskList, Main.savedTasksFile);
-        }
-        catch (IOException e){
-            log.error("IO exception reading or writing file");
-        }
+        TaskIO.writeBinary(taskList, Main.savedTasksFile);
     }
 }
