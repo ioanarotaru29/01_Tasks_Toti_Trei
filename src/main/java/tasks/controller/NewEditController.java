@@ -75,6 +75,7 @@ public class NewEditController {
                 break;
             case "btnEdit" : initEditWindow("Edit Task");
                 break;
+            default: break;
         }
     }
 

@@ -38,10 +38,8 @@ public class Notificator extends Thread {
                         }
                     }
                     else {
-                        if (!t.isRepeated()){
-                            if (getTimeInMinutes(currentDate) == getTimeInMinutes(t.getTime())){
-                                showNotification(t);
-                            }
+                        if (!t.isRepeated() && getTimeInMinutes(currentDate) == getTimeInMinutes(t.getTime())){
+                            showNotification(t);
                         }
 
                     }
@@ -49,7 +47,7 @@ public class Notificator extends Thread {
 
             }
             try {
-                Thread.sleep(millisecondsInSec*secondsInMin);
+                Thread.sleep((long)millisecondsInSec*(long)secondsInMin);
 
             } catch (InterruptedException e) {
                 log.error("thread interrupted exception");
