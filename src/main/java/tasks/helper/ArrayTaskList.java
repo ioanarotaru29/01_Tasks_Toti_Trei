@@ -53,7 +53,7 @@ public class ArrayTaskList extends TaskList {
     }
 
     @Override
-    public void add(Task task){
+    public void add(Task task) throws NullPointerException{
         if (task == null) throw new NullPointerException("Task shouldn't be null");
         if (numberOfTasks == currentCapacity-1){
             currentCapacity = currentCapacity * 2;

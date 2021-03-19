@@ -19,10 +19,14 @@ public class Task implements Serializable, Cloneable {
     private static final Logger log = Logger.getLogger(Task.class.getName());
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
+    public Task() { }
+
     public static SimpleDateFormat getDateFormat(){
         return sdf;
     }
     public Task(String title, Date time){
+        if (title.equals(""))
+            throw new IllegalArgumentException("Title cannot be empty");
         if (time.getTime() < 0) {
             log.error("time below bound");
             throw new IllegalArgumentException("Time cannot be negative");
@@ -33,13 +37,15 @@ public class Task implements Serializable, Cloneable {
         this.end = time;
     }
     public Task(String title, Date start, Date end, int interval){
+        if (title.equals(""))
+            throw new IllegalArgumentException("Title cannot be empty");
         if (start.getTime() < 0 || end.getTime() < 0) {
             log.error("time below bound");
             throw new IllegalArgumentException("Time cannot be negative");
         }
         if (interval < 1) {
             log.error("interval < than 1");
-            throw new IllegalArgumentException("interval should me > 1");
+            throw new IllegalArgumentException("interval should be > 1");
         }
         this.title = title;
         this.start = start;
