@@ -1,6 +1,8 @@
 package tasks.helper;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import tasks.model.Task;
 
 import java.util.ArrayList;
@@ -45,7 +47,8 @@ class ArrayTaskListTest {
 
     //Test for title:String
     @Nested
-    @DisplayName("Tests for title:String")
+    @DisplayName("Tests for title")
+    @Tag("Task Title")
     class Title {
 
         @Test
@@ -77,6 +80,7 @@ class ArrayTaskListTest {
     //Test for time
     @Nested
     @DisplayName("Tests for time")
+    @Tag("Task Time")
     class Time {
 
         @Test
@@ -136,20 +140,23 @@ class ArrayTaskListTest {
     //Test for interval
     @Nested
     @DisplayName("Tests for interval")
+    @Tag("Task Interval")
     class Interval {
 
-        @Test
         @DisplayName("Interval is < 1")
-        void ECP_Interval_1() {
+        @ParameterizedTest(name = "interval {0} is not supported")
+        @ValueSource(ints = { -1, -4, 0 })
+        void ECP_Interval_1(int interval) {
             Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-                list.add( new Task("Task", new Date(), new Date(), 0));
+                list.add( new Task("Task", new Date(), new Date(), interval));
             });
 
             assertEquals(exception.getMessage(), "interval should be > 1");
         }
 
-        @Test
         @DisplayName("Interval is > 1")
+        @ParameterizedTest(name = "interval {0} is supported")
+        @ValueSource(ints = { 1, 2, 3 })
         void ECP_Time_2() {
             Task t = new Task("Task", new Date(), new Date(), 1);
             assertDoesNotThrow(() -> {
