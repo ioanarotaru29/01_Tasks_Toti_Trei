@@ -149,6 +149,8 @@ public class Controller {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(e.getMessage());
             alert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     private Date getDateFromFilterField(LocalDate localDate, String time){

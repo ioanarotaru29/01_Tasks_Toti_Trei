@@ -1,0 +1,26 @@
+
+w
+java:S1104"UMake tasksList a static final constant or non-public and provide accessors if needed.(ß·Š¢ÿÿÿÿÿ8‚ŸŠ·‰/
+Q
+java:S1444#"/Make this "public static infoStage" field final(ßÏ¬Üùÿÿÿÿ8‚ŸŠ·‰/
+R
+java:S2696"6Make the enclosing method "static" or remove this set.(–žÌJ8‚ŸŠ·‰/
+X
+java:S2696@"6Make the enclosing method "static" or remove this set.(ôé½ºûÿÿÿÿ8‚ŸŠ·‰/
+S
+java:S2696Z"6Make the enclosing method "static" or remove this set.(ã¯›ð8‚ŸŠ·‰/
+u
+java:S1104""XMake editNewStage a static final constant or non-public and provide accessors if needed.(¿‰‚×8‚ŸŠ·‰/
+O
+java:S1444""2Make this "public static editNewStage" field final(¿‰‚×8‚ŸŠ·‰/
+L
+java:S3740%"/Provide the parametrized type for this generic.(ãÖÐ·8‚ŸŠ·‰/
+r
+java:S1104%"UMake mainTable a static final constant or non-public and provide accessors if needed.(ãÖÐ·8‚ŸŠ·‰/
+w
+java:S1104#"UMake infoStage a static final constant or non-public and provide accessors if needed.(ßÏ¬Üùÿÿÿÿ8‚ŸŠ·‰/
+K
+java:S3740("/Provide the parametrized type for this generic.(›ƒÆg8‚ŸŠ·‰/
+L
+java:S1444%"/Make this "public static mainTable" field final(ãÖÐ·8‚ŸŠ·‰/
+]	java:S125]"<This block of commented-out lines of code should be removed.(ÁÄûöþÿÿÿÿ8‚ŸŠ·‰/

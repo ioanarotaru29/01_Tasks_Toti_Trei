@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="01_Tasks_Toti_Trei" />
         <module name="01_Tasks" />
         <module name="Tasks" />
-        <module name="01_Tasks_Toti_Trei" />
       </profile>
     </annotationProcessing>
   </component>

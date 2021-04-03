@@ -6,6 +6,7 @@ import tasks.helper.ArrayTaskList;
 import tasks.model.Task;
 import tasks.model.TasksOperations;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class TasksService {
@@ -45,10 +46,24 @@ public class TasksService {
         return (hours * DateService.MINUTES_IN_HOUR + minutes) * DateService.SECONDS_IN_MINUTE;
     }
 
-    public Iterable<Task> filterTasks(Date start, Date end){
-        TasksOperations tasksOps = new TasksOperations(getObservableList());
-        return tasksOps.incoming(start,end);
-        //Iterable<Task> filtered = tasks.incoming(start, end);
-
+    public Iterable<Task> filterTasks(Date start, Date end) throws Exception {
+        ArrayList<Task> incomingTasks = new ArrayList<>();
+        if(end.before(start)){
+            throw new IllegalArgumentException("End time cannot be before start time");
+        }else {
+            TasksOperations tasksOperations = new TasksOperations(getObservableList());
+            int i = 0;
+            while (i<tasksOperations.tasks.size()){
+                Date nextTime = tasksOperations.tasks.get(i).nextTimeAfter(start);
+                if(nextTime != null && (nextTime.before(end) || nextTime.equals(end))){
+                    incomingTasks.add(tasksOperations.tasks.get(i));
+                }
+                i++;
+            }
+            if(incomingTasks.isEmpty()){
+                throw new Exception("No results found");
+            }
+        }
+        return incomingTasks;
     }
 }

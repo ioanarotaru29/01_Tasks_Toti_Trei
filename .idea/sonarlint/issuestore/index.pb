@@ -17,3 +17,9 @@ e
 5src/main/java/tasks/controller/NewEditController.java,6\3\63fe2cc9c3e91dd6fea9fe629ea649e64db0d708
 ]
 -src/main/java/tasks/services/Notificator.java,e\0\e052f65fc7b38b70f0c53b8b0049f85b11a60075
+^
+.src/main/java/tasks/model/TasksOperations.java,4\f\4f01b9f8917f794cdf589fb86ab1f8dec2bc64a1
+^
+.src/main/java/tasks/controller/Controller.java,e\c\ecf3c385b36af4d118754ee8d9878c48978fcaa9
+a
+1src/test/java/tasks/helper/ArrayTaskListTest.java,0\c\0c753ec2ae0a7a38dfecb30ec0798881c1f59029
