@@ -40,13 +40,7 @@ class TasksServiceTest {
         });
 
         assertEquals(exception.getMessage(), END_TIME_BEFORE_START);
-//        try {
-//            tasksService.filterTasks(new Date(1000), new Date(900));
-//            assert (false);
-//        }
-//        catch (Exception e) {
-//            assert(e.getMessage().equals(END_TIME_BEFORE_START));
-//        }
+
     }
 
     @Test
@@ -62,13 +56,6 @@ class TasksServiceTest {
         });
         assertEquals(exception.getMessage(), NO_RESULTS);
 
-//        try {
-//            tasksService.filterTasks(new Date(1000), new Date(2000));
-//            assert (false);
-//        }
-//        catch (Exception e) {
-//            assert(e.getMessage().equals(NO_RESULTS));
-//        }
     }
 
     @Test
@@ -84,13 +71,6 @@ class TasksServiceTest {
             assertEquals(taskIterable.size(), 1);
         });
 
-//        try {
-//            ArrayList<Task> taskIterable = (ArrayList<Task>) tasksService.filterTasks(new Date(1000), new Date(2000));
-//            assert (taskIterable.size() == 1);
-//        }
-//        catch (Exception e) {
-//            assert(false);
-//        }
     }
 
     @Test
@@ -107,13 +87,6 @@ class TasksServiceTest {
             assertEquals(taskIterable.size(), 1);
         });
 
-//        try {
-//            ArrayList<Task> taskIterable = (ArrayList<Task>) tasksService.filterTasks(new Date(1000), new Date(2000));
-//            assert (taskIterable.size() == 1);
-//        }
-//        catch (Exception e) {
-//            assert(false);
-//        }
     }
 
     @Test
@@ -131,13 +104,6 @@ class TasksServiceTest {
             ArrayList<Task> taskIterable = (ArrayList<Task>) tasksService.filterTasks(new Date(1000), new Date(2000));
             assertEquals(taskIterable.size(), 1);
         });
-
-//        try {
-//            ArrayList<Task> taskIterable = (ArrayList<Task>) tasksService.filterTasks(new Date(1000), new Date(2000));
-//            assert (taskIterable.size() == 1);
-//        }
-//        catch (Exception e) {
-//            assert(false);
-//        }
+        
     }
 }
