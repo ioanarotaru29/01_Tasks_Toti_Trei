@@ -1,8 +1,7 @@
-package model;
+package tasks.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tasks.model.Task;
 
 import java.util.Date;
 
@@ -25,6 +24,7 @@ public class TaskWithMockito {
         assertFalse(t2.isActive());
     }
 
+    @Test
     public void testIsRepeated(){
         assertTrue(t2.isRepeated());
         assertFalse(t1.isRepeated());

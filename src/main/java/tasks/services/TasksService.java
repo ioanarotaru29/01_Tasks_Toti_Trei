@@ -68,4 +68,8 @@ public class TasksService {
         }
         return incomingTasks;
     }
+
+    public int getTaskListSize() {
+        return tasks.size();
+    }
 }
