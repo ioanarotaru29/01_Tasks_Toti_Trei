@@ -2,6 +2,7 @@ package tasks.services;
 
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import tasks.helper.ArrayTaskList;
@@ -21,37 +22,33 @@ class TasksServiceTestWithMockitoStep2 {
     }
 
     @Test
+    @DisplayName("Test - get list")
     void getObservableList() {
-        // arrange
         Task task1 = mock(Task.class);
         Task task2 = mock(Task.class);
         Task task3 = mock(Task.class);
         Mockito.when(task1.getTitle()).thenReturn("Titlu1");
 
-        // act
         arrayTaskList.add(task1);
         arrayTaskList.add(task2);
         arrayTaskList.add(task3);
         ObservableList<Task> observableList = tasksService.getObservableList();
 
-        // assert
         assertEquals(observableList.size(), 3);
         assertEquals(observableList.get(0).getTitle(),"Titlu1");
     }
 
     @Test
+    @DisplayName("Test - get list size")
     void getTaskListSize() {
-        // arrange
         Task task1 = mock(Task.class);
         Task task2 = mock(Task.class);
         Task task3 = mock(Task.class);
 
-        // act
         arrayTaskList.add(task1);
         arrayTaskList.add(task2);
         arrayTaskList.add(task3);
 
-        // assert
         assertEquals(tasksService.getTaskListSize(), 3);
     }
 }

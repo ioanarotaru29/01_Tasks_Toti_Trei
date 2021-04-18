@@ -1,6 +1,7 @@
 package tasks.services;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tasks.helper.ArrayTaskList;
 
@@ -18,11 +19,13 @@ class TasksServiceTestWithMockito {
     }
 
     @Test
+    @DisplayName("Test - time unit")
     void formTimeUnit() {
         assert (tasksService.formTimeUnit(30).equals("30"));
     }
 
     @Test
+    @DisplayName("Test - parse string into seconds")
     void parseFromStringToSeconds() {
         assert (tasksService.parseFromStringToSeconds("00:02") == 120);
     }

@@ -2,6 +2,7 @@ package tasks.services;
 
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tasks.helper.ArrayTaskList;
 import tasks.model.Task;
@@ -22,19 +23,17 @@ class TasksServiceTestWithMockitoStep3 {
     }
 
     @Test
+    @DisplayName("Test - get list")
     void getObservableList() {
-        // arrange
         Task task1 = new Task("Title1", new Date(100));
         Task task2 = new Task("Title2", new Date(200));
         Task task3 = new Task("Title3", new Date(300));
 
-        // act
         arrayTaskList.add(task1);
         arrayTaskList.add(task2);
         arrayTaskList.add(task3);
         ObservableList<Task> observableList = tasksService.getObservableList();
 
-        // assert
         assertEquals(observableList.size(), 3);
         assertEquals(observableList.get(0).getTitle(), "Title1");
         assertEquals(observableList.get(1).getTitle(), "Title2");
@@ -42,20 +41,18 @@ class TasksServiceTestWithMockitoStep3 {
     }
 
     @Test
+    @DisplayName("Test - filter tasks")
     void filterTasks() throws Exception {
-        // arrange
         Task task1 = new Task("Title1", new Date(100), new Date(200), 1);
         task1.setActive(true);
         Task task2 = new Task("Title2", new Date(200));
         Task task3 = new Task("Title3", new Date(300));
 
-        // act
         arrayTaskList.add(task1);
         arrayTaskList.add(task2);
         arrayTaskList.add(task3);
         ArrayList<Task> tasks = (ArrayList<Task>) tasksService.filterTasks(new Date(1), new Date(150));
 
-        // assert
         assertEquals(tasks.get(0).getTitle(), "Title1");
     }
 }
