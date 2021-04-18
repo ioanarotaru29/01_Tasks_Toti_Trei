@@ -48,7 +48,6 @@ class ArrayTaskListTest {
     //Test for title:String
     @Nested
     @DisplayName("Tests for title")
-    @Tag("Task Title")
     class Title {
 
         @Test
@@ -78,69 +77,64 @@ class ArrayTaskListTest {
     }
 
     //Test for time
-    @Nested
-    @DisplayName("Tests for time")
-    @Tag("Task Time")
-    class Time {
 
-        @Test
-        @DisplayName("Time is negative")
-        void ECP_Time_1() {
-            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-                list.add( new Task("Task", new Date(-1)));
-            });
 
-            assertEquals(exception.getMessage(), "Time cannot be negative");
-        }
+    @Test
+    @DisplayName("Time is negative")
+    void ECP_Time_1() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            list.add( new Task("Task", new Date(-1)));
+        });
 
-        @Test
-        @DisplayName("Time is ok")
-        void ECP_Time_2() {
-            Task t = new Task("Task", new Date());
-            assertDoesNotThrow(() -> {
-                list.add(t);
-            });
+        assertEquals(exception.getMessage(), "Time cannot be negative");
+    }
 
-            assertEquals(t, list.getTask(list.size()-1));
-        }
+    @Test
+    @DisplayName("Time is ok")
+    void ECP_Time_2() {
+        Task t = new Task("Task", new Date());
+        assertDoesNotThrow(() -> {
+            list.add(t);
+        });
 
-        @Test
-        @DisplayName("Time is 0")
-        void BVA_Time_1() {
-            Task t = new Task("Task", new Date(0));
-            assertDoesNotThrow(() -> {
-                list.add(t);
-            });
+        assertEquals(t, list.getTask(list.size()-1));
+    }
 
-            assertEquals(t, list.getTask(list.size()-1));
-        }
+    @Test
+    @DisplayName("Time is 0")
+    void BVA_Time_1() {
+        Task t = new Task("Task", new Date(0));
+        assertDoesNotThrow(() -> {
+            list.add(t);
+        });
 
-        @Test
-        @DisplayName("Time is positive")
-        void BVA_Time_2() {
-            Task t = new Task("Task", new Date(1));
-            assertDoesNotThrow(() -> {
-                list.add(t);
-            });
+        assertEquals(t, list.getTask(list.size()-1));
+    }
 
-            assertEquals(t, list.getTask(list.size()-1));
-        }
+    @Test
+    @DisplayName("Time is positive")
+    void BVA_Time_2() {
+        Task t = new Task("Task", new Date(1));
+        assertDoesNotThrow(() -> {
+            list.add(t);
+        });
 
-        @Test
-        @DisplayName("Time is negative")
-        void BVA_Time_3() {
-            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-                list.add( new Task("Task", new Date(-1)));
-            });
+        assertEquals(t, list.getTask(list.size()-1));
+    }
 
-            assertEquals(exception.getMessage(), "Time cannot be negative");
-        }
+    @Test
+    @DisplayName("Time is negative")
+    void BVA_Time_3() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            list.add( new Task("Task", new Date(-1)));
+        });
+
+        assertEquals(exception.getMessage(), "Time cannot be negative");
     }
 
     //Test for interval
     @Nested
     @DisplayName("Tests for interval")
-    @Tag("Task Interval")
     class Interval {
 
         @DisplayName("Interval is < 1")
