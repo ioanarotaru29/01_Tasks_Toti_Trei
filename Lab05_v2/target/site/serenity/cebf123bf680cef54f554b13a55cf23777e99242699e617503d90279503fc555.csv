@@ -1,0 +1,4 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"Shop for product","Unsuccessful login","SUCCESS","2021-05-10T19:14:31.5526565+03:00[Europe/Bucharest]","0.0","5.67"
+"Shop for product","Successful login","SUCCESS","2021-05-10T19:14:41.0523982+03:00[Europe/Bucharest]","0.0","1.51"
+"Shop for product","Shop for product","SUCCESS","2021-05-10T19:48:15.8592413+03:00[Europe/Bucharest]","0.0","9.48"
